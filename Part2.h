@@ -1,5 +1,6 @@
 #include<iostream>
-#include"Part1.h"
+
+using namespace std;
 
 class Filtre{
     public:
@@ -12,7 +13,8 @@ class Filtre{
 
 class RC : public Filtre{
     public:
-        RC(float,float);
+        RC();
+        RC(float R_param, float C_param);
         float calcul_vs(float);
     protected:
         float R;
@@ -21,7 +23,8 @@ class RC : public Filtre{
 
 class RD : public Filtre{
     public:
-        RD(float);
+        RD();
+        RD(float R_param);
         float calcul_vs(float);
     protected:
         float R;

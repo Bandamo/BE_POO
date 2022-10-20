@@ -1,4 +1,5 @@
 #include<iostream>
+#include<math.h>
 #include "Part2.h"
 
 using namespace std;
@@ -16,9 +17,44 @@ Filtre::Filtre(){
     cout<<endl;
 }
 
+
 RC::RC(float R_param, float C_param){
     R = R_param;
     C = C_param;
+}
+
+RC::RC(){
+    R=1000;
+    C=pow(10,-6);
+}
+
+float RC::calcul_vs(float tf){
+    vs=0;
+    float dt = 0.001;
+    float vsp = 0;
+
+    FILE * fich;
+    fich=fopen("vs.csv","wt");
+    
+
+    for (float t = 0; t<tf; t+=dt){
+        //MàJ de ve
+
+        vsp = (ve-vs)/(R*C);
+        vs += vsp *dt;
+
+        fprintf(fich,"%f %f \n",t,vs);
+
+    }
+
+    fclose(fich);
+    return 0;
+}
+
+
+RD::RD(){
+    R=100;
+    VBE=0.6;
 }
 
 RD::RD(float R_param){
@@ -26,6 +62,14 @@ RD::RD(float R_param){
     VBE = 0.6;
 }
 
-int main(){
+float RD::calcul_vs(float t){
+    return 0;
+}
 
+int main(){
+    RC circuit1;
+
+    circuit1.calcul_vs(15);
+
+    return 0;
 }
