@@ -79,11 +79,3 @@ float Creneau::tension(float t){
     }
     return 0;
 }
-
-int main(){
-    Triangulaire a;
-    
-    for (float i =0; i<500; i++){
-        cout <<i/100<<","<<a.tension(i/100)<<endl;
-    }
-}

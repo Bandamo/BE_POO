@@ -17,6 +17,9 @@ Filtre::Filtre(){
     cout<<endl;
 }
 
+void Filtre::synchronize_v0_vs(float t){
+    ve = tension(t);
+}
 
 RC::RC(float R_param, float C_param){
     R = R_param;
@@ -25,25 +28,25 @@ RC::RC(float R_param, float C_param){
 
 RC::RC(){
     R=1000;
-    C=pow(10,-6);
+    C=0.000001;
 }
 
 float RC::calcul_vs(float tf){
-    vs=0;
-    float dt = 0.001;
-    float vsp = 0;
+    float dt = 0.00001;
+    float vsp;
 
     FILE * fich;
     fich=fopen("vs.csv","wt");
-    
+    fprintf(fich,"t,vs\n");    
 
     for (float t = 0; t<tf; t+=dt){
         //MàJ de ve
+        synchronize_v0_vs(t);
 
         vsp = (ve-vs)/(R*C);
         vs += vsp *dt;
 
-        fprintf(fich,"%f %f \n",t,vs);
+        fprintf(fich,"%f,%f \n",t,vs);
 
     }
 
@@ -67,9 +70,9 @@ float RD::calcul_vs(float t){
 }
 
 int main(){
-    RC circuit1;
+    RC circuit1(300,0.001);
 
-    circuit1.calcul_vs(15);
+    circuit1.calcul_vs(0.01);
 
     return 0;
 }

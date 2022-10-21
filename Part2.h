@@ -1,11 +1,13 @@
 #include<iostream>
+#include"Part1.h"
 
 using namespace std;
 
-class Filtre{
+class Filtre : public Sinusoidal{
     public:
         Filtre();
         virtual float calcul_vs(float) = 0;
+        void synchronize_v0_vs(float t);
     protected:
         float ve;
         float vs;
