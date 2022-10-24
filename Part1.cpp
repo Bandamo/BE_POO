@@ -39,6 +39,9 @@ float Rectangle::tension(float t){
     if (t<phi+T && t>phi){
         return V0;
     }
+    else{
+        return 0;
+    }
 }
 
 
@@ -52,13 +55,13 @@ Periodic::Periodic(){
 
 
 float Triangulaire::tension(float t){
-    float tp = t -1.5 - phi;
+    float tp = t - phi;
     float Pp = P;
     if (modulo(tp,Pp) < Pp/2){
         return 2*V0/Pp*(modulo(tp,Pp));
     }
     else{
-        return 2*V0/Pp*(1-modulo(tp-Pp/2,Pp));
+        return V0/Pp*(1-2*modulo(tp-Pp/2,Pp));
     }
 }
 
@@ -79,3 +82,20 @@ float Creneau::tension(float t){
     }
     return 0;
 }
+
+/*
+int main(){
+    Rectangle a;
+    FILE * fich;
+    int npas=1000000;
+    float t,dt=5./float(npas);
+    fich=fopen("ve","wt");
+    for(int i=0;i<npas+1;i++)
+    {
+    t=float(i)*dt;
+    fprintf(fich,"%f %f \n",t,a.tension(t));
+    }
+    fclose(fich);
+    return 0;
+}
+*/

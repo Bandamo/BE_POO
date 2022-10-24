@@ -3,7 +3,7 @@
 
 
 #include<iostream>
-#include "Part1.hpp"
+#include "Part1.cpp"
 
 using namespace std;
 
@@ -30,11 +30,13 @@ class RC : public Filtre{
 class RD : public Filtre{
     public:
         RD();
-        RD(float R_param);
+        RD(float R1_param,float R2_param,float C_param);
         float calcul_vs(float);
     protected:
-        float R;
+        float R1;
         float VBE;
+        float R2;
+        float C;
 };
 
 #endif

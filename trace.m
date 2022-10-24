@@ -1,7 +1,6 @@
-load ve
-plot(ve(:,1),vs(:,2),'r')
-legend('ve')
+load vs
+plot(vs(:,1),vs(:,2),'r',vs(:,1),vs(:,3),'b')
+legend('ve','vs')
 xlabel('t (s)')
-ylabel('ve (V)')
-axis([0 pi -1 1])
-title('source ve(t)')
+ylabel('vs (V)')
+axis([0 3 1])

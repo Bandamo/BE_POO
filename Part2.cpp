@@ -9,9 +9,6 @@ float f(float dt, float un, float unmoins1){
 };
 
 Filtre::Filtre(){
-    cout<<"Entrez Ve : ";
-    cin>>ve;
-    cout<<endl;
     cout<<"Entrez Vs : ";
     cin>>vs;
     cout<<endl;
@@ -36,8 +33,7 @@ float RC::calcul_vs(float tf){
     float vsp;
 
     FILE * fich;
-    fich=fopen("vs.csv","wt");
-    fprintf(fich,"t,vs\n");    
+    fich=fopen("vs","wt");   
 
     for (float t = 0; t<tf; t+=dt){
         //MàJ de ve
@@ -46,7 +42,7 @@ float RC::calcul_vs(float tf){
         vsp = (ve-vs)/(R*C);
         vs += vsp *dt;
 
-        fprintf(fich,"%f,%f \n",t,vs);
+        fprintf(fich,"%f %f %f \n",t,ve,vs);
 
     }
 
@@ -56,23 +52,53 @@ float RC::calcul_vs(float tf){
 
 
 RD::RD(){
-    R=100;
+    R1=100;
     VBE=0.6;
+    R2 = 300;
+    C=0.0001;
 }
 
-RD::RD(float R_param){
-    R=R_param;
+RD::RD(float R1_param,float R2_param, float C_param){
+    R1=R1_param;
     VBE = 0.6;
+    R2 = R2_param;
+    C = C_param;
 }
 
-float RD::calcul_vs(float t){
+
+
+float RD::calcul_vs(float tf){
+    float dt = 0.00001;
+    float vsp;
+
+    FILE * fich;
+    fich=fopen("vs","wt");   
+
+    for (float t = 0; t<tf; t+=dt){
+        //MàJ de ve
+        synchronize_v0_vs(t);
+        if (ve>VBE){
+            vsp=-(1/(R1*C)+(1/(R2*C)))*vs+(ve-VBE)/((R1*C));
+        } 
+        else{
+            vsp=-vs/(R2*C);
+        }
+
+        vs += vsp *dt;
+
+        fprintf(fich,"%f %f %f \n",t,ve,vs);
+
+    }
+
+    fclose(fich);
     return 0;
 }
 
 int main(){
-    RC circuit1(300,0.001);
+    RD circuit1;
 
-    circuit1.calcul_vs(0.01);
+    circuit1.calcul_vs(3);
 
     return 0;
 }
+
