@@ -1,5 +1,9 @@
+#ifndef PART2_H_INCLUDED
+#define PART2_H_INCLUDED
+
+
 #include<iostream>
-#include"Part1.h"
+#include "Part1.hpp"
 
 using namespace std;
 
@@ -32,3 +36,5 @@ class RD : public Filtre{
         float R;
         float VBE;
 };
+
+#endif

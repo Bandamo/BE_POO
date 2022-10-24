@@ -1,3 +1,6 @@
+#ifndef PART1_H_INCLUDED
+#define PART1_H_INCLUDED
+
 #include <iostream>
 
 
@@ -49,3 +52,4 @@ class Rectangle:public Source{
     protected:
         float T;
 };
+#endif

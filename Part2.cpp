@@ -1,6 +1,6 @@
 #include<iostream>
 #include<math.h>
-#include "Part2.h"
+#include "Part2.hpp"
 
 using namespace std;
 

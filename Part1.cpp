@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Part1.h"
+#include "Part1.hpp"
 #include <math.h>
 
 using namespace std;
