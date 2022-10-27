@@ -7,12 +7,13 @@
 
 using namespace std;
 
-class Filtre : public Sinusoidal{
+class Filtre{
     public:
         Filtre();
         virtual float calcul_vs(float) = 0;
-        void synchronize_v0_vs(float t);
+        float synchronize_v0_ve(float t);
     protected:
+        Source* source_pointeur;
         float ve;
         float vs;
 };
