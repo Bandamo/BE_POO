@@ -58,10 +58,10 @@ float Triangulaire::tension(float t){
     float tp = t - phi;
     float Pp = P;
     if (modulo(tp,Pp) < Pp/2){
-        return 2*V0/Pp*(modulo(tp,Pp));
+        return 4*V0/Pp*(modulo(tp,Pp))-V0;
     }
     else{
-        return V0/Pp*(1-2*modulo(tp-Pp/2,Pp));
+        return -4*V0/Pp*(modulo(tp-Pp/2,Pp))+V0;
     }
 }
 
@@ -85,7 +85,7 @@ float Creneau::tension(float t){
 
 /*
 int main(){
-    Rectangle a;
+    Triangulaire a;
     FILE * fich;
     int npas=1000000;
     float t,dt=5./float(npas);
