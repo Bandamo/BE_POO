@@ -9,8 +9,33 @@ float f(float dt, float un, float unmoins1){
 };
 
 Filtre::Filtre(){
+    int type_source;
     cout<<"Entrez Vs : ";
     cin>>vs;
+    cout<<endl<<"Entrez type source :\n 1- Creneaux\n 2- Triangulaire\n 3- Sinusoidale\n 4- Echelon\n 5- Rectangle"<<endl;
+    cin>>type_source;
+    switch (type_source)
+    {
+    case 1:
+        source_pointeur = new Creneau;
+        break;
+    case 2:
+        source_pointeur = new Triangulaire;
+        break;
+    case 3:
+        source_pointeur = new Sinusoidal;
+        break;
+    case 4:
+        source_pointeur = new Echelon;
+        break;
+    case 5:
+        source_pointeur = new Rectangle;
+        break;
+
+    default:
+        source_pointeur = new Echelon;
+        break;
+    }
     cout<<endl;
 }
 
